@@ -1,0 +1,15 @@
+node_modules
+
+# Generated
+package-lock.json
+yarn.lock
+build
+coverage
+.devcontainer/cache/**/*
+*.log
+
+# Keys
+prod.env
+/.docker/**/*
+!/.docker/Dockerfile
+.kubernetes/chart/_values.yaml

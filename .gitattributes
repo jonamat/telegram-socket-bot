@@ -1,0 +1,11 @@
+# Files to consider for the lang stats
+* linguist-detectable=false
+src/**/* linguist-detectable=true
+test/**/* linguist-detectable=true
+
+# Generated files
+coverage/**/* linguist-generated=true
+build/**/* linguist-generated=true
+
+# Normalize line ending
+* text=auto
