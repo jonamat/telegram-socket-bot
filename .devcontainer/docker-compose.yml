@@ -1,0 +1,46 @@
+# Definitions for development environment only
+version: '3'
+
+services:
+    app:
+        container_name: telegram-socket-bot_app
+        build:
+            context: ..
+            dockerfile: .devcontainer/Dockerfile
+        depends_on:
+            - mongo
+            - mysql
+        volumes:
+            - ..:/workspace
+            - telegram-socket-bot_modules:/node_modules
+        ports:
+            - 3000:3000
+        command: /bin/ash -c "while sleep 1000; do :; done"
+    mongo:
+        container_name: telegram-socket-bot_mongo
+        image: mongo:4.4.3-bionic
+        environment:
+            MONGO_INITDB_ROOT_USERNAME: admin
+            MONGO_INITDB_ROOT_PASSWORD: admin
+        volumes:
+            - telegram-socket-bot_data:/data/db
+        ports:
+            - 27020:27017
+    mysql:
+        container_name: telegram-socket-bot_mysql
+        image: mysql:8.0.23
+        environment:
+            MYSQL_ROOT_PASSWORD: root
+            MYSQL_USER: admin
+            MYSQL_PASSWORD: admin
+        volumes:
+            - telegram-socket-bot_logs:/var/lib/
+            # Create the initial db configuration on container creation
+            - ./setup.sql:/docker-entrypoint-initdb.d/setup.sql
+        ports:
+            - 3310:3306
+
+volumes:
+    telegram-socket-bot_data:
+    telegram-socket-bot_logs:
+    telegram-socket-bot_modules:
