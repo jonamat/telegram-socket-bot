@@ -1,0 +1,16 @@
+{
+    "recommendations": [
+        "streetsidesoftware.code-spell-checker",
+        "irongeek.vscode-env",
+        "yzhang.markdown-all-in-one",
+        "adpyke.vscode-sql-formatter",
+        "coenraads.bracket-pair-colorizer-2",
+        "meganrogge.template-string-converter",
+        "vscode-icons-team.vscode-icons",
+        "stackbreak.comment-divider",
+        "ms-azuretools.vscode-docker",
+        "wix.vscode-import-cost",
+        "foxundermoon.shell-format",
+        "aaron-bond.better-comments"
+    ]
+}
