@@ -1,0 +1,40 @@
+version: 2.1
+
+jobs:
+    Test:
+        docker:
+            - image: circleci/node:15.8.0
+        steps:
+            - checkout
+            - run: echo "Running tests"
+            - restore_cache:
+                  key: dependency-cache-{{ checksum "package-lock.json" }}
+            - run: npm install
+            - save_cache:
+                  key: dependency-cache-{{ checksum "package-lock.json" }}
+                  paths:
+                      - ./node_modules
+            - run: npm run "TEST all"
+    Build:
+        docker:
+            - image: circleci/node:15.3.0
+        steps:
+            - checkout
+            - run: echo "Build project"
+            - restore_cache:
+                  key: dependency-cache-{{ checksum "package-lock.json" }}
+            - run: npm install
+            - save_cache:
+                  key: dependency-cache-{{ checksum "package-lock.json" }}
+                  paths:
+                      - ./node_modules
+            - run: npm run "BUILD"
+
+workflows:
+    version: 2
+    test_build:
+        jobs:
+            - Test
+            - Build:
+                  requires:
+                      - Test
