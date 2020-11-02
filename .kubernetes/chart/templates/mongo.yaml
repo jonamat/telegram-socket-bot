@@ -1,0 +1,50 @@
+# Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: mongo-depl
+spec:
+    selector:
+        matchLabels:
+            app: mongo
+    strategy:
+        type: Recreate
+    template:
+        metadata:
+            labels:
+                app: mongo
+        spec:
+            containers:
+                - name: mongo
+                  image: {{ .Values.mongoImage }}
+                  resources:
+                      limits:
+                          memory: '1Gi'
+                          cpu: '500m'
+                  ports:
+                      - containerPort: 27017
+                        name: mongo
+                  volumeMounts:
+                      - name: data
+                        mountPath: /data/db
+                  envFrom:
+                      - secretRef:
+                            name: mongo-secr
+            volumes:
+                - name: data
+                  persistentVolumeClaim:
+                      claimName: data-pvc
+---
+# Service
+apiVersion: v1
+kind: Service
+metadata:
+    name: mongo-serv
+spec:
+    selector:
+        app: mongo
+    ports:
+        - protocol: TCP
+          port: 27017
+          targetPort: 27017
+    clusterIP: None

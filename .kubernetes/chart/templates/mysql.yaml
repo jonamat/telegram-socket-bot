@@ -1,0 +1,57 @@
+# Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: mysql-depl
+spec:
+    selector:
+        matchLabels:
+            app: mysql
+    strategy:
+        type: Recreate
+    template:
+        metadata:
+            labels:
+                app: mysql
+        spec:
+            containers:
+                - name: mysql
+                  image: {{ .Values.mysqlImage }}
+                  tty: true
+                  stdin: true
+                  resources:
+                      limits:
+                          memory: '1Gi'
+                          cpu: '500m'
+                  ports:
+                      - containerPort: 3306
+                        name: mysql
+                  volumeMounts:
+                      - name: logs
+                        mountPath: /var/lib
+                      - name: mysql-init
+                        mountPath: /docker-entrypoint-initdb.d/
+                  envFrom:
+                      - secretRef:
+                            name: mysql-secr
+            volumes:
+                - name: logs
+                  persistentVolumeClaim:
+                      claimName: logs-pvc
+                - name: mysql-init
+                  persistentVolumeClaim:
+                      claimName: mysql-init-pvc
+---
+# Service
+apiVersion: v1
+kind: Service
+metadata:
+    name: mysql-serv
+spec:
+    selector:
+        app: mysql
+    ports:
+        - protocol: TCP
+          port: 3306
+          targetPort: 3306
+    clusterIP: None

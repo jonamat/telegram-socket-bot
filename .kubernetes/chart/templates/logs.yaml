@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+    name: logs-pv
+    labels:
+        type: local
+spec:
+    storageClassName: manual
+    capacity:
+        storage: { { .Values.logsStorageCapacity } }
+    accessModes:
+        - ReadWriteOnce
+    hostPath:
+        path: '/mnt/data'
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+    name: logs-pvc
+spec:
+    storageClassName: manual
+    accessModes:
+        - ReadWriteOnce
+    resources:
+        requests:
+            storage: { { .Values.logsStorageCapacity } }

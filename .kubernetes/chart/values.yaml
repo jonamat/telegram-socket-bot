@@ -1,0 +1,17 @@
+tsbImage: jonamat/telegram-socket-bot:1.0.1
+mysqlImage: mysql:8.0.23
+mongoImage: mongo:4.4.3-bionic
+
+dataStorageCapacity: 10Gi
+logsStorageCapacity: 10Gi
+
+tsbPort: 80
+
+secrets:
+    mongo:
+        username: xxgrmrer
+        password: xeFq9PECs5WpZPxU9vgRGDSx
+    mysql:
+        rootPassword: tZsFm6k7ZnPXRYe2Zan2phdV
+        username: tsmkhsqu
+        password: 5W7f2Ykw4Yu3Pg9pET7D6U3E

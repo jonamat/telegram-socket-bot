@@ -1,0 +1,13 @@
+apiVersion: v2
+description: Telegram bot to establish connections between clients and Telegram over WebSocket protocol
+name: Telegram Socket Bot
+icon: https://github.com/jonamat/telegram-socket-bot/raw/icon.png
+appVersion: '0.1.0'
+version: 1.0.0
+home: https://github.com/jonamat/telegram-socket-bot/
+sources:
+    - https://github.com/jonamat/telegram-socket-bot/
+maintainers:
+    - name: Jonathan Mataloni
+      email: jo.mataloni@gmail.com
+      url: https//github.com/jonamat/

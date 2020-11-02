@@ -1,0 +1,16 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+    name: ingress
+    labels:
+        name: ingress
+spec:
+    rules:
+        - host: localhost
+          http:
+              paths:
+                  - pathType: Prefix
+                    path: '/'
+                    backend:
+                        serviceName: app
+                        servicePort: { { .Values.tsbPort } }
