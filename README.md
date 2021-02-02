@@ -1,7 +1,7 @@
 # telegram-socket-bot
 
 This is a Telegram bot server to establish full duplex connections between clients and Telegram accounts through WebSocket protocol.<br>
-This bot is been created to interact with react-telegram-chatbox, but can also be used with custom applications (see [socket integration] (# with-socket.io)).
+This bot is been created to interact with react-telegram-chatbox, but can also be used with custom applications (see [socket integration](#with-socket.io)).
 
 ## Usage
 
